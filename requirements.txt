@@ -1,1 +1,5 @@
 django==3.2.9
+black==21.11b1
+djangorestframework==3.12.4
+django-filter==21.1
+jwt==1.3.1
