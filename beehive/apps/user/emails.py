@@ -1,6 +1,5 @@
 import os
 
-# PassCave Stuff
 from apps.base.emails import SendTransactionalEmail
 from apps.base.utils.urls import resolve_frontend_url
 from apps.user.tokens import get_token_for_password_reset
