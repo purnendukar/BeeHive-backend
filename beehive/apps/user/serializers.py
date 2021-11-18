@@ -1,0 +1,76 @@
+from rest_framework import serializers
+from rest_framework.authtoken.models import Token
+
+from apps.user.models import User, UserProfile
+
+
+class AuthRequestSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ["email", "password"]
+
+
+class SignRequestSerializer(AuthRequestSerializer):
+    class Meta:
+        model = AuthRequestSerializer.Meta.model
+        fields = ["first_name", "last_name"] + AuthRequestSerializer.Meta.fields
+
+
+class PasswordResetSerializer(serializers.Serializer):
+    email = serializers.EmailField()
+
+
+class PasswordResetConfirmSerializer(serializers.Serializer):
+    email = serializers.EmailField()
+    token = serializers.CharField()
+    new_password = serializers.CharField()
+
+    class Meta:
+        fields = ["email", "token", "new_password"]
+
+
+class UserProfileResponseSerializer(serializers.ModelSerializer):
+    # plan = PlanSerializer(read_only=True)
+
+    class Meta:
+        model = UserProfile
+        # fields = ["plan"]
+
+
+class ProfileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = UserProfile
+        # fields = ["user", "plan"]
+
+    def to_representation(self, instance):
+        data = super().to_representation(instance)
+        # data["plan"] = PlanSerializer(instance.plan).data
+        return data
+
+
+class UserAuthSerializer(serializers.ModelSerializer):
+    token = serializers.SerializerMethodField()
+    profile = UserProfileResponseSerializer(read_only=True, many=False)
+
+    class Meta:
+        model = User
+        fields = ["email", "first_name", "last_name", "profile", "token"]
+
+    def get_token(self, user):
+        token, created = Token.objects.get_or_create(user=user)
+        return token.key
+
+
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ["id", "email", "first_name", "last_name"]
+
+
+class UserProfileSerializer(UserSerializer):
+    profile = UserProfileResponseSerializer(read_only=True, many=False)
+
+    class Meta:
+        model = User
+        fields = UserSerializer.Meta.fields + ["profile"]
+        read_only_fields = ["email"]
