@@ -1,5 +1,5 @@
-# from django.urls import path
-# from django.urls.conf import include
+from django.urls import path
+from django.urls.conf import include
 
 from rest_framework.routers import DefaultRouter
 
@@ -10,4 +10,7 @@ default_router = DefaultRouter(trailing_slash=False)
 
 default_router.register("auth", AuthViewset, basename="auth")
 
-urlpatterns = default_router.urls
+urlpatterns = [
+    path("plan/", include("apps.plan.urls"), name="plan"),
+]
+urlpatterns += default_router.urls
