@@ -1,8 +1,8 @@
 # See: https://github.com/mkdocs/mkdocs/blob/master/docs/user-guide/configuration.md
-site_name: PassCave
-site_description: PassCave is password management system.
+site_name: BeeHive
+site_description: BeeHive is project management system.
 site_author: purnendukar
-repo_url: https://github.com/purnendukar/PassCave-backend
+repo_url: https://github.com/purnendukar/BeeHive-backend
 
 nav:
   - Introduction: index.md
