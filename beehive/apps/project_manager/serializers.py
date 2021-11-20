@@ -1,21 +1,33 @@
 from rest_framework import serializers
 
-from apps.project_manager.models import Project, Sprint, Task
-from beehive.apps.project_manager.models import Status, TaskComment
+from apps.project_manager.models import (
+    Project,
+    Sprint,
+    Task,
+    Status,
+    TaskAttachment,
+    TaskComment,
+    TaskCommentAttachment,
+)
 
 
 class ProjectSerializer(serializers.ModelSerializer):
     class Meta:
         model = Project
-        fields = ["name", "description"]
+        fields = ("name", "description")
 
 
 class SprintSerializer(serializers.ModelSerializer):
-    project = ProjectSerializer(read_only=True)
-
     class Meta:
         model = Sprint
-        fields = ("number", "name", "description", "start_date", "end_date")
+        fields = (
+            "number",
+            "name",
+            "description",
+            "project",
+            "start_date",
+            "end_date",
+        )
 
 
 class StatusSerialier(serializers.ModelSerializer):
@@ -24,10 +36,14 @@ class StatusSerialier(serializers.ModelSerializer):
         fields = ("name", "description")
 
 
+class TaskAttachmentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = TaskAttachment
+        fields = ("file",)
+
+
 class TaskSerializer(serializers.ModelSerializer):
-    sprint = SprintSerializer(read_only=True)
-    status = StatusSerialier(read_only=False)
-    depedency = serializers.PrimaryKeyRelatedField()
+    attachment = serializers.SerializerMethodField()
 
     class Meta:
         model = Task
@@ -41,8 +57,31 @@ class TaskSerializer(serializers.ModelSerializer):
             "reporter",
         )
 
+    def to_representation(self, instance):
+        data = super().to_representation(instance)
+        data["status"] = StatusSerialier(instance.status).data
+        return data
+
+    def get_attachment(self, instance):
+        if hasattr(instance, "task_attachment"):
+            return TaskAttachmentSerializer(instance.task_attachment).data
+        return []
+
+
+class TaskCommentAttachmentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = TaskCommentAttachment
+        fields = ("file",)
+
 
 class TaskCommentSerializer(serializers.ModelSerializer):
+    attachment = serializers.SerializerMethodField()
+
     class Meta:
         model = TaskComment
-        fields = ("user", "comment", "attachment")
+        fields = ("user", "comment")
+
+    def get_attachment(self, instance):
+        if hasattr(instance, "task_comment_attachment"):
+            return TaskAttachmentSerializer(instance.task_comment_attachment).data
+        return []
