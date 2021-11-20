@@ -1,13 +1,36 @@
 from django.db import models
-from django.db.models.fields import related
 
 from apps.base.models import BaseModel
 from apps.user.models import User
 
 
+class ProjectRole(BaseModel):
+    name = models.CharField(max_length=255)
+    description = models.TextField(blank=True)
+    slug = models.SlugField(max_length=255)
+
+
 class Project(BaseModel):
     name = models.CharField(max_length=255)
     description = models.TextField(blank=True)
+    member = models.ManyToManyField(
+        User,
+        on_delete=models.CASCADE,
+        related_name="user_project",
+        through="ProjectMemberRole",
+    )
+
+
+class ProjectMemberRole(BaseModel):
+    project = models.ForeignKey(
+        Project, on_delete=models.CASCADE, related_name="project_member_role"
+    )
+    user = models.ForeignKey(
+        User, on_delete=models.CASCADE, related_name="projects_role"
+    )
+    role = models.ManyToManyField(
+        ProjectRole,
+    )
 
 
 class Sprint(BaseModel):
@@ -71,4 +94,10 @@ class TaskComment(BaseModel):
         Task, on_delete=models.CASCADE, related_name="task_comment"
     )
     comment = models.TextField(blank=True)
-    attachment = models.FileField(null=True, blank=True)
+
+
+class TaskCommentAttachment(BaseModel):
+    task_comment = models.ForeignKey(
+        TaskComment, related_name="task_comment_attachment"
+    )
+    file = models.FileField()
