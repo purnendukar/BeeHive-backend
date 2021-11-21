@@ -43,6 +43,10 @@ class ProjectMemberViewSet(
             project__member__in=[self.request.user],
         )
 
+    def create(self, request, *args, **kwargs):
+        request.data["project"] = self.kwargs.get("project_id")
+        return super().create(request, *args, **kwargs)
+
 
 class SprintViewSet(
     mixins.ListModelMixin,
