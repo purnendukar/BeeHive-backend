@@ -1,4 +1,4 @@
-from rest_framework.viewsets import GenericViewSet, ModelViewSet
+from rest_framework.viewsets import GenericViewSet
 from rest_framework import mixins
 
 from apps.project_manager.models import Project, Sprint, Task, ProjectMember
@@ -13,6 +13,7 @@ from apps.base.mixins import MultiSerializerMixin
 
 class ProjectViewSet(
     mixins.ListModelMixin,
+    mixins.RetrieveModelMixin,
     mixins.CreateModelMixin,
     mixins.UpdateModelMixin,
     GenericViewSet,
@@ -29,6 +30,7 @@ class ProjectViewSet(
 
 class ProjectMemberViewSet(
     mixins.ListModelMixin,
+    mixins.RetrieveModelMixin,
     mixins.CreateModelMixin,
     mixins.UpdateModelMixin,
     GenericViewSet,
@@ -50,6 +52,7 @@ class ProjectMemberViewSet(
 
 class SprintViewSet(
     mixins.ListModelMixin,
+    mixins.RetrieveModelMixin,
     mixins.CreateModelMixin,
     mixins.UpdateModelMixin,
     GenericViewSet,
@@ -64,7 +67,14 @@ class SprintViewSet(
         )
 
 
-class TaskViewSet(MultiSerializerMixin, ModelViewSet):
+class TaskViewSet(
+    MultiSerializerMixin,
+    mixins.ListModelMixin,
+    mixins.RetrieveModelMixin,
+    mixins.CreateModelMixin,
+    mixins.UpdateModelMixin,
+    GenericViewSet,
+):
     queryset = Task.objects.all()
     serializer_class = TaskSerializer
 
