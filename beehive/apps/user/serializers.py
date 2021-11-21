@@ -4,16 +4,20 @@ from rest_framework.authtoken.models import Token
 from apps.user.models import User, UserProfile
 
 
-class AuthRequestSerializer(serializers.ModelSerializer):
+class AuthRequestSerializer(serializers.Serializer):
+    email = serializers.EmailField()
+    password = serializers.CharField()
+
+
+class SignRequestSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ["email", "password"]
-
-
-class SignRequestSerializer(AuthRequestSerializer):
-    class Meta:
-        model = AuthRequestSerializer.Meta.model
-        fields = ["first_name", "last_name"] + AuthRequestSerializer.Meta.fields
+        fields = [
+            "first_name",
+            "last_name",
+            "email",
+            "password",
+        ]
 
 
 class PasswordResetSerializer(serializers.Serializer):
