@@ -1,11 +1,12 @@
 from rest_framework.viewsets import GenericViewSet, ModelViewSet
 from rest_framework import mixins
 
-from apps.project_manager.models import Project, Sprint, Task
+from apps.project_manager.models import Project, Sprint, Task, ProjectMember
 from apps.project_manager.serializers import (
     ProjectSerializer,
     SprintSerializer,
     TaskSerializer,
+    ProjectMemberSerializer,
 )
 from apps.base.mixins import MultiSerializerMixin
 
@@ -22,7 +23,24 @@ class ProjectViewSet(
     def get_queryset(self):
         queryset = super().get_queryset()
         return queryset.filter(
-            memeber__in=self.request.user,
+            member__in=[self.request.user],
+        )
+
+
+class ProjectMemberViewSet(
+    mixins.ListModelMixin,
+    mixins.CreateModelMixin,
+    mixins.UpdateModelMixin,
+    GenericViewSet,
+):
+    queryset = ProjectMember.objects.all()
+    serializer_class = ProjectMemberSerializer
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        return queryset.filter(
+            project=self.kwargs.get("project_id"),
+            user__in=[self.request.user],
         )
 
 
@@ -38,7 +56,7 @@ class SprintViewSet(
     def get_queryset(self):
         queryset = super().get_queryset()
         return queryset.filter(
-            project__memeber__in=self.request.user,
+            project__member__in=[self.request.user],
         )
 
 
@@ -49,5 +67,5 @@ class TaskViewSet(MultiSerializerMixin, ModelViewSet):
     def get_queryset(self):
         queryset = super().get_queryset()
         return queryset.filter(
-            sprint__project__memeber__in=self.request.user,
+            sprint__project__member__in=[self.request.user],
         )
