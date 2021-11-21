@@ -69,7 +69,7 @@ class Task(BaseModel):
     sprint = models.ForeignKey(
         Sprint, on_delete=models.CASCADE, related_name="sprint_task"
     )
-    # parent = models.ForeignKey("self", on_delete=models.CASCADE)
+    parent = models.ForeignKey("self", on_delete=models.CASCADE, null=True, blank=True)
     depedency = models.ForeignKey(
         "self",
         on_delete=models.CASCADE,
