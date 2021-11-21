@@ -28,6 +28,7 @@ class SprintSerializer(serializers.ModelSerializer):
     class Meta:
         model = Sprint
         fields = (
+            "id",
             "number",
             "name",
             "description",
@@ -40,13 +41,16 @@ class SprintSerializer(serializers.ModelSerializer):
 class StatusSerialier(serializers.ModelSerializer):
     class Meta:
         model = TaskStatus
-        fields = ("name", "description")
+        fields = ("id", "name", "description")
 
 
 class TaskAttachmentSerializer(serializers.ModelSerializer):
     class Meta:
         model = TaskAttachment
-        fields = ("file",)
+        fields = (
+            "id",
+            "file",
+        )
 
 
 class TaskSerializer(serializers.ModelSerializer):
@@ -55,10 +59,12 @@ class TaskSerializer(serializers.ModelSerializer):
     class Meta:
         model = Task
         fields = (
+            "id",
             "title",
             "description",
             "sprint",
             "status",
+            "parent",
             "depedency",
             "assignee",
             "reporter",
@@ -79,7 +85,10 @@ class TaskSerializer(serializers.ModelSerializer):
 class TaskCommentAttachmentSerializer(serializers.ModelSerializer):
     class Meta:
         model = TaskCommentAttachment
-        fields = ("file",)
+        fields = (
+            "id",
+            "file",
+        )
 
 
 class TaskCommentSerializer(serializers.ModelSerializer):
@@ -87,7 +96,7 @@ class TaskCommentSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = TaskComment
-        fields = ("user", "comment")
+        fields = ("id", "user", "comment")
 
     def get_attachment(self, instance):
         if hasattr(instance, "task_comment_attachment"):
