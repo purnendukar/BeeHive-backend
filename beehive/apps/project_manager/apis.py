@@ -40,7 +40,7 @@ class ProjectMemberViewSet(
         queryset = super().get_queryset()
         return queryset.filter(
             project=self.kwargs.get("project_id"),
-            user__in=[self.request.user],
+            project__member__in=[self.request.user],
         )
 
 
