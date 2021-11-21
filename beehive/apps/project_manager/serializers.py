@@ -5,7 +5,7 @@ from apps.project_manager.models import (
     ProjectMember,
     Sprint,
     Task,
-    Status,
+    TaskStatus,
     TaskAttachment,
     TaskComment,
     TaskCommentAttachment,
@@ -39,7 +39,7 @@ class SprintSerializer(serializers.ModelSerializer):
 
 class StatusSerialier(serializers.ModelSerializer):
     class Meta:
-        model = Status
+        model = TaskStatus
         fields = ("name", "description")
 
 
@@ -55,13 +55,14 @@ class TaskSerializer(serializers.ModelSerializer):
     class Meta:
         model = Task
         fields = (
-            "name",
+            "title",
             "description",
             "sprint",
             "status",
             "depedency",
             "assignee",
             "reporter",
+            "attachment",
         )
 
     def to_representation(self, instance):
@@ -71,7 +72,7 @@ class TaskSerializer(serializers.ModelSerializer):
 
     def get_attachment(self, instance):
         if hasattr(instance, "task_attachment"):
-            return TaskAttachmentSerializer(instance.task_attachment).data
+            return TaskAttachmentSerializer(instance.task_attachment, many=True).data
         return []
 
 
