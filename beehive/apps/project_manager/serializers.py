@@ -2,6 +2,7 @@ from rest_framework import serializers
 
 from apps.project_manager.models import (
     Project,
+    ProjectMember,
     Sprint,
     Task,
     Status,
@@ -9,6 +10,12 @@ from apps.project_manager.models import (
     TaskComment,
     TaskCommentAttachment,
 )
+
+
+class ProjectMemberSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ProjectMember
+        fields = ("id", "project", "user", "role")
 
 
 class ProjectSerializer(serializers.ModelSerializer):
