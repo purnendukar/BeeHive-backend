@@ -60,6 +60,8 @@ class SprintViewSet(
     queryset = Sprint.objects.all()
     serializer_class = SprintSerializer
 
+    filterset_fields = ("project",)
+
     def get_queryset(self):
         queryset = super().get_queryset()
         return queryset.filter(
@@ -77,6 +79,8 @@ class TaskViewSet(
 ):
     queryset = Task.objects.all()
     serializer_class = TaskSerializer
+
+    filterset_fields = ("sprint",)
 
     def get_queryset(self):
         queryset = super().get_queryset()
