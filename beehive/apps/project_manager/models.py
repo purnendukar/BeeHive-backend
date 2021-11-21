@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.translation import ugettext_lazy as _
 
 from apps.base.models import BaseModel
 from apps.user.models import User
@@ -14,22 +15,24 @@ class Project(BaseModel):
     name = models.CharField(max_length=255)
     description = models.TextField(blank=True)
     member = models.ManyToManyField(
-        User,
-        related_name="user_project",
-        through="ProjectMemberRole",
+        User, through="ProjectMember", related_name="project_member"
     )
 
 
-class ProjectMemberRole(BaseModel):
-    project = models.ForeignKey(
-        Project, on_delete=models.CASCADE, related_name="project_member_role"
-    )
+class ProjectMember(BaseModel):
     user = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name="projects_role"
     )
-    role = models.ManyToManyField(
-        ProjectRole,
+    project = models.ForeignKey(
+        Project, on_delete=models.CASCADE, related_name="project_member"
     )
+    role = models.ManyToManyField(ProjectRole)
+
+    class Meta:
+        unique_together = ["user", "project"]
+        ordering = ["created_at"]
+        verbose_name = _("Project Member")
+        verbose_name_plural = _("Project Member")
 
 
 class Sprint(BaseModel):
