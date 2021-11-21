@@ -10,6 +10,11 @@ nav:
       - Overview: api/0-overview.md
       - Authentication: api/1-auth.md
       - Plan: api/2-plan.md
+      - Project Manager:
+          - Project: api/3-project.md
+          - Project Members: api/4-project-member.md
+          - Sprint: api/5-sprint.md
+          - Task: api/6-task.md
   - Releases:
       - Changelog: releases.md
 
