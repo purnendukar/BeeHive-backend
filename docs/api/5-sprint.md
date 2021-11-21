@@ -9,6 +9,13 @@
 GET /api/project-manager/sprint (requires authentication)
 ```
 
+**Filter Parameter**
+
+Name     | Description
+---------|-------------------------------------
+project | project id
+
+
 **Response**
 ```
 Status: 200 OK

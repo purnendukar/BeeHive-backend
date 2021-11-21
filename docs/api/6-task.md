@@ -9,6 +9,12 @@
 GET /api/project-manager/task (requires authentication)
 ```
 
+**Filter Parameter**
+
+Name     | Description
+---------|-------------------------------------
+sprint | sprint id
+
 **Response**
 ```
 Status: 200 OK
