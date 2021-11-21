@@ -19,7 +19,6 @@ class ProjectMemberInline(admin.StackedInline):
 
 class ProjectAdmin(admin.ModelAdmin):
     inlines = (ProjectMemberInline,)
-    # pass
 
 
 admin.site.register(Project, ProjectAdmin)
