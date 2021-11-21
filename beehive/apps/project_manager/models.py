@@ -18,6 +18,9 @@ class Project(BaseModel):
         User, through="ProjectMember", related_name="project_member"
     )
 
+    def __str__(self) -> str:
+        return self.name
+
 
 class ProjectMember(BaseModel):
     user = models.ForeignKey(
@@ -41,20 +44,27 @@ class Sprint(BaseModel):
     )
     number = models.IntegerField()
     name = models.CharField(max_length=255)
+    description = models.TextField(blank=True)
     start_date = models.DateField()
     end_date = models.DateField()
 
+    def __str__(self) -> str:
+        return f"{self.name}({self.project})"
 
-class Status(BaseModel):
+
+class TaskStatus(BaseModel):
     name = models.CharField(max_length=255)
     description = models.TextField(blank=True)
+
+    def __str__(self) -> str:
+        return self.name
 
 
 class Task(BaseModel):
-    name = models.CharField(max_length=255)
+    title = models.CharField(max_length=255)
     description = models.TextField(blank=True)
     status = models.ForeignKey(
-        Status, on_delete=models.CASCADE, related_name="status_task"
+        TaskStatus, on_delete=models.CASCADE, related_name="status_task"
     )
     sprint = models.ForeignKey(
         Sprint, on_delete=models.CASCADE, related_name="sprint_task"
@@ -81,6 +91,9 @@ class Task(BaseModel):
         blank=True,
         related_name="reported_task",
     )
+
+    def __str__(self) -> str:
+        return f"{self.title}({self.sprint.name} - {self.sprint.project})"
 
 
 class TaskAttachment(BaseModel):
