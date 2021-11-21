@@ -21,7 +21,7 @@ class ProjectMemberSerializer(serializers.ModelSerializer):
 class ProjectSerializer(serializers.ModelSerializer):
     class Meta:
         model = Project
-        fields = ("name", "description")
+        fields = ("id", "name", "description")
 
 
 class SprintSerializer(serializers.ModelSerializer):
