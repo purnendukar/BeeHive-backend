@@ -10,7 +10,12 @@ from apps.project_manager.serializers import (
 from apps.base.mixins import MultiSerializerMixin
 
 
-class ProjectViewSet(mixins.ListModelMixin, mixins.CreateModelMixin, GenericViewSet):
+class ProjectViewSet(
+    mixins.ListModelMixin,
+    mixins.CreateModelMixin,
+    mixins.UpdateModelMixin,
+    GenericViewSet,
+):
     queryset = Project.objects.all()
     serializer_class = ProjectSerializer
 
@@ -21,7 +26,12 @@ class ProjectViewSet(mixins.ListModelMixin, mixins.CreateModelMixin, GenericView
         )
 
 
-class SprintViewSet(mixins.ListModelMixin, mixins.CreateModelMixin, GenericViewSet):
+class SprintViewSet(
+    mixins.ListModelMixin,
+    mixins.CreateModelMixin,
+    mixins.UpdateModelMixin,
+    GenericViewSet,
+):
     queryset = Sprint.objects.all()
     serializer_class = SprintSerializer
 
