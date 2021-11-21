@@ -15,7 +15,6 @@ class Project(BaseModel):
     description = models.TextField(blank=True)
     member = models.ManyToManyField(
         User,
-        on_delete=models.CASCADE,
         related_name="user_project",
         through="ProjectMemberRole",
     )
@@ -82,7 +81,9 @@ class Task(BaseModel):
 
 
 class TaskAttachment(BaseModel):
-    task = models.ForeignKey(Task, related_name="task_attachment")
+    task = models.ForeignKey(
+        Task, on_delete=models.CASCADE, related_name="task_attachment"
+    )
     file = models.FileField(null=True, blank=True)
 
 
@@ -98,6 +99,6 @@ class TaskComment(BaseModel):
 
 class TaskCommentAttachment(BaseModel):
     task_comment = models.ForeignKey(
-        TaskComment, related_name="task_comment_attachment"
+        TaskComment, on_delete=models.CASCADE, related_name="task_comment_attachment"
     )
     file = models.FileField()
