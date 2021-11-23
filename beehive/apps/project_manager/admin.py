@@ -7,6 +7,7 @@ from apps.project_manager.models import (
     Sprint,
     Task,
     TaskStatus,
+    ProjectPermission,
 )
 
 
@@ -22,7 +23,9 @@ class ProjectAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Project, ProjectAdmin)
+admin.site.register(ProjectPermission)
 admin.site.register(ProjectRole)
+admin.site.register(ProjectMember)
 admin.site.register(Sprint)
 admin.site.register(Task)
 admin.site.register(TaskStatus)

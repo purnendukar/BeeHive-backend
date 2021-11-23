@@ -8,7 +8,7 @@ from apps.project_manager.serializers import (
     TaskSerializer,
     ProjectMemberSerializer,
 )
-from apps.base.mixins import MultiSerializerMixin
+from apps.project_manager.perissions import ProjectMemberPermission
 
 
 class ProjectViewSet(
@@ -20,6 +20,12 @@ class ProjectViewSet(
 ):
     queryset = Project.objects.all()
     serializer_class = ProjectSerializer
+
+    def get_permissions(self):
+        permissions = super().get_permissions()
+        if self.action in ["update", "partial_update"]:
+            permissions += [ProjectMemberPermission()]
+        return permissions
 
     def get_queryset(self):
         queryset = super().get_queryset()
@@ -37,6 +43,12 @@ class ProjectMemberViewSet(
 ):
     queryset = ProjectMember.objects.all()
     serializer_class = ProjectMemberSerializer
+
+    def get_permissions(self):
+        permissions = super().get_permissions()
+        if self.action in ["create", "update", "partial_update"]:
+            permissions += [ProjectMemberPermission()]
+        return permissions
 
     def get_queryset(self):
         queryset = super().get_queryset()
@@ -60,6 +72,11 @@ class SprintViewSet(
     queryset = Sprint.objects.all()
     serializer_class = SprintSerializer
 
+    def get_permissions(self):
+        permissions = super().get_permissions()
+        permissions += [ProjectMemberPermission()]
+        return permissions
+
     filterset_fields = ("project",)
 
     def get_queryset(self):
@@ -70,7 +87,6 @@ class SprintViewSet(
 
 
 class TaskViewSet(
-    MultiSerializerMixin,
     mixins.ListModelMixin,
     mixins.RetrieveModelMixin,
     mixins.CreateModelMixin,
@@ -79,6 +95,11 @@ class TaskViewSet(
 ):
     queryset = Task.objects.all()
     serializer_class = TaskSerializer
+
+    def get_permissions(self):
+        permissions = super().get_permissions()
+        permissions += [ProjectMemberPermission()]
+        return permissions
 
     filterset_fields = ("sprint",)
 
