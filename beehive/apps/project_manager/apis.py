@@ -65,6 +65,7 @@ class ProjectRoleViewSet(
 
     def get_queryset(self):
         queryset = super().get_queryset()
+        # Filter project related data that is associated to user
         return queryset.filter(
             project=self.kwargs.get("project_id"),
             project__member__in=[self.request.user],
@@ -92,6 +93,7 @@ class ProjectMemberViewSet(
 
     def get_queryset(self):
         queryset = super().get_queryset()
+        # Filter project related data that is associated to user
         return queryset.filter(
             project=self.kwargs.get("project_id"),
             project__member__in=[self.request.user],
@@ -121,6 +123,7 @@ class SprintViewSet(
 
     def get_queryset(self):
         queryset = super().get_queryset()
+        # Filter member related data
         return queryset.filter(
             project__member__in=[self.request.user],
         )
@@ -145,6 +148,7 @@ class TaskViewSet(
 
     def get_queryset(self):
         queryset = super().get_queryset()
+        # Filter member related data
         return queryset.filter(
             sprint__project__member__in=[self.request.user],
         )
