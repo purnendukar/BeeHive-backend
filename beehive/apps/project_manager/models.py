@@ -30,7 +30,6 @@ class Project(BaseModel):
 class ProjectRole(BaseModel):
     name = models.CharField(max_length=255)
     description = models.TextField(blank=True)
-    slug = models.SlugField(max_length=255)
     permission = models.ManyToManyField(ProjectPermission)
     project = models.ForeignKey(Project, on_delete=models.CASCADE)
 

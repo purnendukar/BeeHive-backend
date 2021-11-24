@@ -1,14 +1,38 @@
 from rest_framework.viewsets import GenericViewSet
 from rest_framework import mixins
 
-from apps.project_manager.models import Project, Sprint, Task, ProjectMember
+from apps.project_manager.models import (
+    Project,
+    Sprint,
+    Task,
+    ProjectMember,
+    ProjectRole,
+    ProjectPermission,
+)
 from apps.project_manager.serializers import (
     ProjectSerializer,
     SprintSerializer,
     TaskSerializer,
     ProjectMemberSerializer,
+    ProjectRoleSerializer,
+    ProjectPermissionSerializer,
 )
 from apps.project_manager.perissions import ProjectMemberPermission
+
+
+class ProjectPermissionViewSet(mixins.ListModelMixin, GenericViewSet):
+    queryset = ProjectPermission.objects.all()
+    serializer_class = ProjectPermissionSerializer
+
+
+class ProjectRoleViewSet(
+    mixins.ListModelMixin,
+    mixins.CreateModelMixin,
+    mixins.UpdateModelMixin,
+    GenericViewSet,
+):
+    queryset = ProjectRole.objects.all()
+    serializer_class = ProjectRoleSerializer
 
 
 class ProjectViewSet(
