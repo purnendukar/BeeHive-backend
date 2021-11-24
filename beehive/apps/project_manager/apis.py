@@ -20,21 +20,6 @@ from apps.project_manager.serializers import (
 from apps.project_manager.perissions import ProjectMemberPermission
 
 
-class ProjectPermissionViewSet(mixins.ListModelMixin, GenericViewSet):
-    queryset = ProjectPermission.objects.all()
-    serializer_class = ProjectPermissionSerializer
-
-
-class ProjectRoleViewSet(
-    mixins.ListModelMixin,
-    mixins.CreateModelMixin,
-    mixins.UpdateModelMixin,
-    GenericViewSet,
-):
-    queryset = ProjectRole.objects.all()
-    serializer_class = ProjectRoleSerializer
-
-
 class ProjectViewSet(
     mixins.ListModelMixin,
     mixins.RetrieveModelMixin,
@@ -55,6 +40,29 @@ class ProjectViewSet(
         queryset = super().get_queryset()
         return queryset.filter(
             member__in=[self.request.user],
+        )
+
+
+class ProjectPermissionViewSet(mixins.ListModelMixin, GenericViewSet):
+    queryset = ProjectPermission.objects.all()
+    serializer_class = ProjectPermissionSerializer
+
+
+class ProjectRoleViewSet(
+    mixins.ListModelMixin,
+    mixins.RetrieveModelMixin,
+    mixins.CreateModelMixin,
+    mixins.UpdateModelMixin,
+    GenericViewSet,
+):
+    queryset = ProjectRole.objects.all()
+    serializer_class = ProjectRoleSerializer
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        return queryset.filter(
+            project=self.kwargs.get("project_id"),
+            project__member__in=[self.request.user],
         )
 
 
