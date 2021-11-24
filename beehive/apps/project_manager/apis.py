@@ -58,12 +58,20 @@ class ProjectRoleViewSet(
     queryset = ProjectRole.objects.all()
     serializer_class = ProjectRoleSerializer
 
+    def get_permissions(self):
+        permissions = super().get_permissions()
+        permissions += [ProjectMemberPermission()]
+        return permissions
+
     def get_queryset(self):
         queryset = super().get_queryset()
         return queryset.filter(
             project=self.kwargs.get("project_id"),
             project__member__in=[self.request.user],
         )
+
+    def perform_create(self, serializer):
+        serializer.save(project_id=self.kwargs.get("project_id"))
 
 
 class ProjectMemberViewSet(
