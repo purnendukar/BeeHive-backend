@@ -23,7 +23,7 @@ class ProjectPermissionSerializer(serializers.ModelSerializer):
 class ProjectRoleSerializer(serializers.ModelSerializer):
     class Meta:
         model = ProjectRole
-        fields = ("id", "name", "permission")
+        fields = ("id", "name", "description", "permission")
 
     def to_representation(self, instance):
         data = super().to_representation(instance)

@@ -22,6 +22,7 @@ Status: 200 OK
         {
             "id": "68f764ab-36b2-4f6a-9281-412867a40e6d",
             "name": "admin",
+            "description": "admin",
             "permission": [
                 {
                     "id": "0a259b52-341f-4e42-baf2-cbdb76b0818a",
@@ -48,6 +49,7 @@ Status: 200 OK
 {
     "id": "68f764ab-36b2-4f6a-9281-412867a40e6d",
     "name": "admin",
+    "description": "admin",
     "permission": [
         {
             "id": "0a259b52-341f-4e42-baf2-cbdb76b0818a",
@@ -71,11 +73,13 @@ Name     | Description
 ---------|-------------------------------------
 name | name of role
 permission | list of permission ids
+description | description of role
 
 **Request**
 ```json
 {
     "name": "admin",
+    "description": "admin",
     "permission": [
         "0a259b52-341f-4e42-baf2-cbdb76b0818a"
     ]
@@ -90,6 +94,7 @@ Status: 201 Created
 {
     "id": "68f764ab-36b2-4f6a-9281-412867a40e6d",
     "name": "admin",
+    "description": "admin",
     "permission": [
         {
             "id": "0a259b52-341f-4e42-baf2-cbdb76b0818a",
@@ -113,11 +118,13 @@ Name     | Description
 ---------|-------------------------------------
 name | name of role
 permission | list of permission ids
+description | description of role
 
 **Request**
 ```json
 {
     "name": "admin",
+    "description": "admin",
     "permission": [
         "0a259b52-341f-4e42-baf2-cbdb76b0818a"
     ]
@@ -132,6 +139,7 @@ Status: 201 Created
 {
     "id": "68f764ab-36b2-4f6a-9281-412867a40e6d",
     "name": "admin",
+    "description": "admin",
     "permission": [
         {
             "id": "0a259b52-341f-4e42-baf2-cbdb76b0818a",
