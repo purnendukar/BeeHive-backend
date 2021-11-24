@@ -5,10 +5,15 @@ from apps.base.models import BaseModel
 from apps.user.models import User
 
 
-class ProjectRole(BaseModel):
-    name = models.CharField(max_length=255)
+class ProjectPermission(BaseModel):
+    title = models.CharField(max_length=255)
+    slug = models.SlugField()
     description = models.TextField(blank=True)
-    slug = models.SlugField(max_length=255)
+    view = models.CharField(max_length=255)
+    action = models.CharField(max_length=255)
+
+    def __str__(self) -> str:
+        return f"{self.title} ({self.view} - {self.action})"
 
 
 class Project(BaseModel):
@@ -22,6 +27,16 @@ class Project(BaseModel):
         return self.name
 
 
+class ProjectRole(BaseModel):
+    name = models.CharField(max_length=255)
+    description = models.TextField(blank=True)
+    permission = models.ManyToManyField(ProjectPermission)
+    project = models.ForeignKey(Project, on_delete=models.CASCADE)
+
+    def __str__(self) -> str:
+        return f"{self.name} ({self.project})"
+
+
 class ProjectMember(BaseModel):
     user = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name="projects_role"
@@ -29,7 +44,10 @@ class ProjectMember(BaseModel):
     project = models.ForeignKey(
         Project, on_delete=models.CASCADE, related_name="project_member"
     )
-    role = models.ManyToManyField(ProjectRole)
+    role = models.ForeignKey(ProjectRole, on_delete=models.CASCADE)
+
+    def __str__(self) -> str:
+        return f"{self.user} ({self.project} - {self.role.name})"
 
     class Meta:
         unique_together = ["user", "project"]

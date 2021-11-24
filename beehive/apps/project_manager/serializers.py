@@ -2,6 +2,8 @@ from rest_framework import serializers
 
 from apps.project_manager.models import (
     Project,
+    ProjectPermission,
+    ProjectRole,
     ProjectMember,
     Sprint,
     Task,
@@ -10,6 +12,25 @@ from apps.project_manager.models import (
     TaskComment,
     TaskCommentAttachment,
 )
+
+
+class ProjectPermissionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ProjectPermission
+        fields = ("id", "title", "description")
+
+
+class ProjectRoleSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ProjectRole
+        fields = ("id", "name", "description", "permission")
+
+    def to_representation(self, instance):
+        data = super().to_representation(instance)
+        data["permission"] = ProjectPermissionSerializer(
+            instance.permission.all(), many=True
+        ).data
+        return data
 
 
 class ProjectMemberSerializer(serializers.ModelSerializer):

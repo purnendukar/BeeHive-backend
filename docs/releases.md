@@ -34,3 +34,13 @@
 - Add `GET /api/project-manager/task` endpoint.
 - Add `POST /api/project-manager/task` endpoint.
 - Add `PATCH /api/project-manager/task` endpoint.
+
+## Dev (24/10/2021 -- 25/10/2021)
+
+**25/10/2021**
+
+- Add `GET /api/project-manager/project/:project_id/roles` endpoint.
+- Add `POST /api/project-manager/project/:project_id/roles` endpoint.
+- Add `PATCH /api/project-manager/project/:project_id/roles` endpoint.
+
+- Add `GET /api/project-manager/permissions` endpoint.
