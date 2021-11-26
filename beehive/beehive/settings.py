@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     "django_filters",
     "rest_framework",
     "rest_framework.authtoken",
+    "corsheaders",
     "apps.user",
     "apps.plan",
     "apps.project_manager",
@@ -54,6 +55,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
+    "corsheaders.middleware.CorsMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
@@ -177,3 +179,6 @@ EMAIL_PORT = env("EMAIL_PORT")
 EMAIL_USE_TLS = True
 
 DEFAULT_FROM_EMAIL = env("DEFAULT_FROM_EMAIL")
+
+# CORS settings
+CORS_ALLOWED_ORIGINS = env.list("CORS_ALLOWED_ORIGINS")
