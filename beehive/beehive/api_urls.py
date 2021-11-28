@@ -11,7 +11,7 @@ default_router = DefaultRouter(trailing_slash=False)
 default_router.register("auth", AuthViewset, basename="auth")
 
 urlpatterns = [
-    path("plan/", include("apps.plan.urls"), name="plan"),
+    path("plans/", include("apps.plan.urls"), name="plan"),
     path(
         "project-manager/", include("apps.project_manager.urls"), name="project_manager"
     ),

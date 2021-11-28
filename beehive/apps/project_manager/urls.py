@@ -16,18 +16,18 @@ from apps.project_manager.apis import (
 default_router = DefaultRouter(trailing_slash=False)
 
 default_router.register(
-    r"project/(?P<project_id>[^/.]+)/member",
+    r"projects/(?P<project_id>[^/.]+)/members",
     ProjectMemberViewSet,
     basename="project_members",
 )
 default_router.register(
-    r"project/(?P<project_id>[^/.]+)/roles",
+    r"projects/(?P<project_id>[^/.]+)/roles",
     ProjectRoleViewSet,
     basename="project_role",
 )
-default_router.register("project", ProjectViewSet, basename="project")
-default_router.register("sprint", SprintViewSet, basename="sprint")
-default_router.register("task", TaskViewSet, basename="task")
+default_router.register("projects", ProjectViewSet, basename="project")
+default_router.register("sprints", SprintViewSet, basename="sprint")
+default_router.register("tasks", TaskViewSet, basename="task")
 default_router.register(
     "permissions", ProjectPermissionViewSet, basename="project_permission"
 )
