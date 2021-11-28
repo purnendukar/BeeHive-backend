@@ -6,7 +6,7 @@
 ## Get List
 
 ```
-GET /api/project-manager/project/:project_id/member (requires authentication)
+GET /api/project-manager/projects/:project_id/members (requires authentication)
 ```
 
 **Response**
@@ -42,7 +42,7 @@ Status: 200 OK
 ## Get Object
 
 ```
-GET /api/project-manager/project/:project_id/member/:member_id (requires authentication)
+GET /api/project-manager/projects/:project_id/members/:member_id (requires authentication)
 ```
 
 **Response**
@@ -64,7 +64,7 @@ Status: 200 OK
 ## Create new data
 
 ```
-POST /api/project-manager/project:project_id/member (requires authentication)
+POST /api/project-manager/projects/:project_id/members (requires authentication)
 ```
 
 **Parameters**
@@ -103,7 +103,7 @@ Status: 201 Created
 ## Partial Update
 
 ```
-PATCH /api/project-manager/project/:project_id/member/:member_id(requires authentication)
+PATCH /api/project-manager/projects/:project_id/members/:member_id(requires authentication)
 ```
 
 **Parameters**

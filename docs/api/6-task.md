@@ -6,7 +6,7 @@
 ## Get List
 
 ```
-GET /api/project-manager/task (requires authentication)
+GET /api/project-manager/tasks (requires authentication)
 ```
 
 **Filter Parameter**
@@ -64,7 +64,7 @@ Status: 200 OK
 ## Get Object
 
 ```
-GET /api/project-manager/task/:task_id (requires authentication)
+GET /api/project-manager/tasks/:task_id (requires authentication)
 ```
 
 **Response**
@@ -94,7 +94,7 @@ Status: 200 OK
 ## Create new data
 
 ```
-POST /api/project-manager/task (requires authentication)
+POST /api/project-manager/tasks (requires authentication)
 ```
 
 **Parameters**
@@ -151,7 +151,7 @@ Status: 201 Created
 ## Partial Update
 
 ```
-PATCH /api/project-manager/task/:task_id (requires authentication)
+PATCH /api/project-manager/tasks/:task_id (requires authentication)
 ```
 
 **Parameters**

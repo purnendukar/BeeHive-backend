@@ -6,7 +6,7 @@
 ## Get List
 
 ```
-GET /api/project-manager/project/:project_id/roles (requires authentication)
+GET /api/project-manager/projects/:project_id/roles (requires authentication)
 ```
 
 **Response**
@@ -38,7 +38,7 @@ Status: 200 OK
 ## Get Object
 
 ```
-GET /api/project-manager/project/:project_id/roles/:roles_id (requires authentication)
+GET /api/project-manager/projects/:project_id/roles/:roles_id (requires authentication)
 ```
 
 **Response**
@@ -64,7 +64,7 @@ Status: 200 OK
 ## Create new data
 
 ```
-POST /api/project-manager/project:project_id/roles (requires authentication)
+POST /api/project-manager/projects/:project_id/roles (requires authentication)
 ```
 
 **Parameters**
@@ -109,7 +109,7 @@ Status: 201 Created
 ## Partial Update
 
 ```
-PATCH /api/project-manager/project/:project_id/roles/:roles_id(requires authentication)
+PATCH /api/project-manager/projects/:project_id/roles/:roles_id(requires authentication)
 ```
 
 **Parameters**

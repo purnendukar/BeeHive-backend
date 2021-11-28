@@ -6,7 +6,7 @@
 ## Get List
 
 ```
-GET /api/project-manager/sprint (requires authentication)
+GET /api/project-manager/sprints (requires authentication)
 ```
 
 **Filter Parameter**
@@ -51,7 +51,7 @@ Status: 200 OK
 ## Get Object
 
 ```
-GET /api/project-manager/sprint/:sprint_id (requires authentication)
+GET /api/project-manager/sprints/:sprint_id (requires authentication)
 ```
 
 **Response**
@@ -70,7 +70,7 @@ Status: 200 OK
 ## Create new data
 
 ```
-POST /api/project-manager/sprint (requires authentication)
+POST /api/project-manager/sprints (requires authentication)
 ```
 
 **Parameters**
@@ -116,7 +116,7 @@ Status: 201 Created
 ## Partial Update
 
 ```
-PATCH /api/project-manager/sprint/:sprint_id (requires authentication)
+PATCH /api/project-manager/sprints/:sprint_id (requires authentication)
 ```
 
 **Parameters**

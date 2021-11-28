@@ -19,28 +19,28 @@
 
 **21/10/2021**
 
-- Add `GET /api/project-manager/project` endpoint.
-- Add `POST /api/project-manager/project` endpoint.
-- Add `PATCH /api/project-manager/project` endpoint.
+- Add `GET /api/project-manager/projects` endpoint.
+- Add `POST /api/project-manager/projects` endpoint.
+- Add `PATCH /api/project-manager/projects` endpoint.
 
-- Add `GET /api/project-manager/project/:project_id/member` endpoint.
-- Add `POST /api/project-manager/project/:project_id/member` endpoint.
-- Add `PATCH /api/project-manager/project/:project_id/member` endpoint.
+- Add `GET /api/project-manager/projects/:project_id/members` endpoint.
+- Add `POST /api/project-manager/projects/:project_id/members` endpoint.
+- Add `PATCH /api/project-manager/projects/:project_id/members` endpoint.
 
-- Add `GET /api/project-manager/sprint` endpoint.
-- Add `POST /api/project-manager/sprint` endpoint.
-- Add `PATCH /api/project-manager/sprint` endpoint.
+- Add `GET /api/project-manager/sprints` endpoint.
+- Add `POST /api/project-manager/sprints` endpoint.
+- Add `PATCH /api/project-manager/sprints` endpoint.
 
-- Add `GET /api/project-manager/task` endpoint.
-- Add `POST /api/project-manager/task` endpoint.
-- Add `PATCH /api/project-manager/task` endpoint.
+- Add `GET /api/project-manager/tasks` endpoint.
+- Add `POST /api/project-manager/tasks` endpoint.
+- Add `PATCH /api/project-manager/tasks` endpoint.
 
 ## Dev (24/10/2021 -- 25/10/2021)
 
 **25/10/2021**
 
-- Add `GET /api/project-manager/project/:project_id/roles` endpoint.
-- Add `POST /api/project-manager/project/:project_id/roles` endpoint.
-- Add `PATCH /api/project-manager/project/:project_id/roles` endpoint.
+- Add `GET /api/project-manager/projects/:project_id/roles` endpoint.
+- Add `POST /api/project-manager/projects/:project_id/roles` endpoint.
+- Add `PATCH /api/project-manager/projects/:project_id/roles` endpoint.
 
 - Add `GET /api/project-manager/permissions` endpoint.
