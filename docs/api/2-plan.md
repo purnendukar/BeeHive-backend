@@ -6,7 +6,7 @@
 ## Get List
 
 ```
-GET /api/plan
+GET /api/plans
 ```
 
 **Response**
