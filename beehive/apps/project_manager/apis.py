@@ -1,3 +1,6 @@
+from django.utils import timezone
+from django.db.models import Q
+from rest_framework.response import Response
 from rest_framework.viewsets import GenericViewSet
 from rest_framework import mixins
 
@@ -5,6 +8,7 @@ from apps.project_manager.models import (
     Project,
     Sprint,
     Task,
+    TaskStatus,
     ProjectMember,
     ProjectRole,
     ProjectPermission,
@@ -13,6 +17,7 @@ from apps.project_manager.serializers import (
     ProjectSerializer,
     SprintSerializer,
     TaskSerializer,
+    TaskStatusSerialier,
     ProjectMemberSerializer,
     ProjectRoleSerializer,
     ProjectPermissionSerializer,
@@ -129,6 +134,21 @@ class SprintViewSet(
         )
 
 
+class BoardViewSet(GenericViewSet):
+    queryset = Task.objects.all()
+    serializer_class = TaskSerializer
+    pagination_class = None
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        today = timezone.now().date()
+        return queryset.filter(
+            Q(sprint__end_date__gte=today, sprint__start_date__lte=today)
+            | Q(sprint__end_date__lte=today, status__is_complete=False),
+            sprint__project__member__in=[self.request.user],
+        )
+
+
 class TaskViewSet(
     mixins.ListModelMixin,
     mixins.RetrieveModelMixin,
@@ -152,3 +172,31 @@ class TaskViewSet(
         return queryset.filter(
             sprint__project__member__in=[self.request.user],
         )
+
+
+class TaskStatusViewSet(
+    mixins.ListModelMixin,
+    mixins.RetrieveModelMixin,
+    mixins.CreateModelMixin,
+    mixins.UpdateModelMixin,
+    GenericViewSet,
+):
+    queryset = TaskStatus.objects.all()
+    serializer_class = TaskStatusSerialier
+
+    # def get_permissions(self):
+    #     permissions = super().get_permissions()
+    #     permissions += [ProjectMemberPermission()]
+    #     return permissions
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        # Filter project related data
+        return queryset.filter(
+            project=self.kwargs.get("project_id"),
+            project__member__in=[self.request.user],
+        )
+
+    def create(self, request, *args, **kwargs):
+        request.data["project"] = kwargs.get("project_id")
+        return super().create(request, *args, **kwargs)

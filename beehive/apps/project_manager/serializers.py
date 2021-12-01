@@ -1,3 +1,4 @@
+from django.db.models import fields
 from rest_framework import serializers
 
 from apps.project_manager.models import (
@@ -59,10 +60,18 @@ class SprintSerializer(serializers.ModelSerializer):
         )
 
 
-class StatusSerialier(serializers.ModelSerializer):
+class TaskStatusSerialier(serializers.ModelSerializer):
     class Meta:
         model = TaskStatus
-        fields = ("id", "name", "description")
+        fields = (
+            "id",
+            "name",
+            "description",
+            "sort_order",
+            "is_todo",
+            "is_complete",
+            "project",
+        )
 
 
 class TaskAttachmentSerializer(serializers.ModelSerializer):
@@ -94,7 +103,14 @@ class TaskSerializer(serializers.ModelSerializer):
 
     def to_representation(self, instance):
         data = super().to_representation(instance)
-        data["status"] = StatusSerialier(instance.status).data
+        data["status"] = TaskStatusSerialier(
+            instance.status,
+            fields=(
+                "id",
+                "name",
+                "description",
+            ),
+        ).data
         return data
 
     def get_attachment(self, instance):

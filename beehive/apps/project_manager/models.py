@@ -73,6 +73,12 @@ class Sprint(BaseModel):
 class TaskStatus(BaseModel):
     name = models.CharField(max_length=255)
     description = models.TextField(blank=True)
+    project = models.ForeignKey(
+        Project, on_delete=models.CASCADE, related_name="project_task"
+    )
+    sort_order = models.PositiveIntegerField()
+    is_todo = models.BooleanField(default=False)
+    is_complete = models.BooleanField(default=True)
 
     def __str__(self) -> str:
         return self.name
