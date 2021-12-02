@@ -83,6 +83,9 @@ class TaskStatus(BaseModel):
     def __str__(self) -> str:
         return f"{self.name} ({self.project})"
 
+    class Meta:
+        ordering = ("sort_order",)
+
 
 class Task(BaseModel):
     title = models.CharField(max_length=255)
