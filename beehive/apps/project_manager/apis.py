@@ -149,7 +149,13 @@ class TaskViewSet(
         permissions += [ProjectMemberPermission()]
         return permissions
 
-    filterset_fields = ("sprint", "sprint__project")
+    filterset_fields = (
+        "sprint",
+        "sprint__project",
+        "status__is_complete",
+        "sprint__start_date",
+        "sprint__end_date",
+    )
 
     def get_queryset(self):
         queryset = super().get_queryset()
