@@ -134,21 +134,6 @@ class SprintViewSet(
         )
 
 
-class BoardViewSet(GenericViewSet):
-    queryset = Task.objects.all()
-    serializer_class = TaskSerializer
-    pagination_class = None
-
-    def get_queryset(self):
-        queryset = super().get_queryset()
-        today = timezone.now().date()
-        return queryset.filter(
-            Q(sprint__end_date__gte=today, sprint__start_date__lte=today)
-            | Q(sprint__end_date__lte=today, status__is_complete=False),
-            sprint__project__member__in=[self.request.user],
-        )
-
-
 class TaskViewSet(
     mixins.ListModelMixin,
     mixins.RetrieveModelMixin,
@@ -164,7 +149,7 @@ class TaskViewSet(
         permissions += [ProjectMemberPermission()]
         return permissions
 
-    filterset_fields = ("sprint",)
+    filterset_fields = ("sprint", "sprint__project")
 
     def get_queryset(self):
         queryset = super().get_queryset()
@@ -184,10 +169,10 @@ class TaskStatusViewSet(
     queryset = TaskStatus.objects.all()
     serializer_class = TaskStatusSerialier
 
-    # def get_permissions(self):
-    #     permissions = super().get_permissions()
-    #     permissions += [ProjectMemberPermission()]
-    #     return permissions
+    def get_permissions(self):
+        permissions = super().get_permissions()
+        permissions += [ProjectMemberPermission()]
+        return permissions
 
     def get_queryset(self):
         queryset = super().get_queryset()
