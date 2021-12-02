@@ -78,10 +78,10 @@ class TaskStatus(BaseModel):
     )
     sort_order = models.PositiveIntegerField()
     is_todo = models.BooleanField(default=False)
-    is_complete = models.BooleanField(default=True)
+    is_complete = models.BooleanField(default=False)
 
     def __str__(self) -> str:
-        return self.name
+        return f"{self.name} ({self.project})"
 
 
 class Task(BaseModel):
