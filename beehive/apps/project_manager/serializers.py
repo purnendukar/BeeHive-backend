@@ -40,6 +40,12 @@ class ProjectMemberSerializer(DynamicFieldsModelSerializer):
         model = ProjectMember
         fields = ("id", "project", "user", "role")
 
+    def to_representation(self, instance):
+        data = super().to_representation(instance)
+        data["user"] = UserSerializer(instance.user).data
+        data["role"] = ProjectRoleSerializer(instance.role).data
+        return data
+
 
 class ProjectSerializer(DynamicFieldsModelSerializer):
     class Meta:
