@@ -1,3 +1,4 @@
+from re import search
 from django.utils import timezone
 from django.db.models import Q
 from rest_framework.response import Response
@@ -148,6 +149,8 @@ class TaskViewSet(
         permissions = super().get_permissions()
         permissions += [ProjectMemberPermission()]
         return permissions
+
+    search_fields = ("title",)
 
     filterset_fields = (
         "sprint",
