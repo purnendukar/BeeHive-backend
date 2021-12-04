@@ -1,6 +1,7 @@
-from django.db.models import fields
 from rest_framework import serializers
 
+from apps.base.serializers import DynamicFieldsModelSerializer
+from apps.user.serializers import UserSerializer
 from apps.project_manager.models import (
     Project,
     ProjectPermission,
@@ -15,13 +16,13 @@ from apps.project_manager.models import (
 )
 
 
-class ProjectPermissionSerializer(serializers.ModelSerializer):
+class ProjectPermissionSerializer(DynamicFieldsModelSerializer):
     class Meta:
         model = ProjectPermission
         fields = ("id", "title", "description")
 
 
-class ProjectRoleSerializer(serializers.ModelSerializer):
+class ProjectRoleSerializer(DynamicFieldsModelSerializer):
     class Meta:
         model = ProjectRole
         fields = ("id", "name", "description", "permission")
@@ -34,19 +35,19 @@ class ProjectRoleSerializer(serializers.ModelSerializer):
         return data
 
 
-class ProjectMemberSerializer(serializers.ModelSerializer):
+class ProjectMemberSerializer(DynamicFieldsModelSerializer):
     class Meta:
         model = ProjectMember
         fields = ("id", "project", "user", "role")
 
 
-class ProjectSerializer(serializers.ModelSerializer):
+class ProjectSerializer(DynamicFieldsModelSerializer):
     class Meta:
         model = Project
         fields = ("id", "name", "description")
 
 
-class SprintSerializer(serializers.ModelSerializer):
+class SprintSerializer(DynamicFieldsModelSerializer):
     class Meta:
         model = Sprint
         fields = (
@@ -60,7 +61,7 @@ class SprintSerializer(serializers.ModelSerializer):
         )
 
 
-class TaskStatusSerialier(serializers.ModelSerializer):
+class TaskStatusSerialier(DynamicFieldsModelSerializer):
     class Meta:
         model = TaskStatus
         fields = (
@@ -74,7 +75,7 @@ class TaskStatusSerialier(serializers.ModelSerializer):
         )
 
 
-class TaskAttachmentSerializer(serializers.ModelSerializer):
+class TaskAttachmentSerializer(DynamicFieldsModelSerializer):
     class Meta:
         model = TaskAttachment
         fields = (
@@ -83,7 +84,7 @@ class TaskAttachmentSerializer(serializers.ModelSerializer):
         )
 
 
-class TaskSerializer(serializers.ModelSerializer):
+class TaskSerializer(DynamicFieldsModelSerializer):
     attachment = serializers.SerializerMethodField()
 
     class Meta:
@@ -111,6 +112,7 @@ class TaskSerializer(serializers.ModelSerializer):
                 "description",
             ),
         ).data
+        data["assignee"] = UserSerializer(instance.assignee).data
         return data
 
     def get_attachment(self, instance):
@@ -119,7 +121,7 @@ class TaskSerializer(serializers.ModelSerializer):
         return []
 
 
-class TaskCommentAttachmentSerializer(serializers.ModelSerializer):
+class TaskCommentAttachmentSerializer(DynamicFieldsModelSerializer):
     class Meta:
         model = TaskCommentAttachment
         fields = (
@@ -128,7 +130,7 @@ class TaskCommentAttachmentSerializer(serializers.ModelSerializer):
         )
 
 
-class TaskCommentSerializer(serializers.ModelSerializer):
+class TaskCommentSerializer(DynamicFieldsModelSerializer):
     attachment = serializers.SerializerMethodField()
 
     class Meta:
