@@ -159,6 +159,7 @@ class TaskViewSet(
         "sprint__start_date",
         "sprint__end_date",
         "status",
+        "assignee",
     )
 
     def get_queryset(self):
