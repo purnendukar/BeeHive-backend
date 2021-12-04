@@ -5,6 +5,7 @@ from apps.project_manager.models import (
     Project,
     Sprint,
     Task,
+    TaskStatus,
     ProjectMember,
     ProjectRole,
     ProjectPermission,
@@ -13,6 +14,7 @@ from apps.project_manager.serializers import (
     ProjectSerializer,
     SprintSerializer,
     TaskSerializer,
+    TaskStatusSerialier,
     ProjectMemberSerializer,
     ProjectRoleSerializer,
     ProjectPermissionSerializer,
@@ -144,7 +146,17 @@ class TaskViewSet(
         permissions += [ProjectMemberPermission()]
         return permissions
 
-    filterset_fields = ("sprint",)
+    search_fields = ("title",)
+
+    filterset_fields = (
+        "sprint",
+        "sprint__project",
+        "status__is_complete",
+        "sprint__start_date",
+        "sprint__end_date",
+        "status",
+        "assignee",
+    )
 
     def get_queryset(self):
         queryset = super().get_queryset()
@@ -152,3 +164,31 @@ class TaskViewSet(
         return queryset.filter(
             sprint__project__member__in=[self.request.user],
         )
+
+
+class TaskStatusViewSet(
+    mixins.ListModelMixin,
+    mixins.RetrieveModelMixin,
+    mixins.CreateModelMixin,
+    mixins.UpdateModelMixin,
+    GenericViewSet,
+):
+    queryset = TaskStatus.objects.all()
+    serializer_class = TaskStatusSerialier
+
+    def get_permissions(self):
+        permissions = super().get_permissions()
+        permissions += [ProjectMemberPermission()]
+        return permissions
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        # Filter project related data
+        return queryset.filter(
+            project=self.kwargs.get("project_id"),
+            project__member__in=[self.request.user],
+        )
+
+    def create(self, request, *args, **kwargs):
+        request.data["project"] = kwargs.get("project_id")
+        return super().create(request, *args, **kwargs)

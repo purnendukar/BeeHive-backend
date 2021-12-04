@@ -12,6 +12,7 @@ nav:
       - Plan: api/2-plan.md
       - Project Manager:
           - Project: api/3-project.md
+          - Project Status: api/9-project-status.md
           - Project Permission: api/7-project-permission.md
           - Project Role: api/8-project-role.md
           - Project Members: api/4-project-member.md
