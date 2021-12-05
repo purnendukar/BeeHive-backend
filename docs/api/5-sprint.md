@@ -6,14 +6,16 @@
 ## Get List
 
 ```
-GET /api/project-manager/sprints (requires authentication)
+GET /api/project-manager/projects/:project_id/sprints (requires authentication)
 ```
 
 **Filter Parameter**
 
 Name     | Description
 ---------|-------------------------------------
-project | project id
+start_date | Start Date of sprint
+end_date | End Date of sprint
+search | Search data based on name and desciption
 
 
 **Response**
@@ -51,7 +53,7 @@ Status: 200 OK
 ## Get Object
 
 ```
-GET /api/project-manager/sprints/:sprint_id (requires authentication)
+GET /api/project-manager/projects/:project_id/sprints/:sprint_id (requires authentication)
 ```
 
 **Response**
@@ -70,7 +72,7 @@ Status: 200 OK
 ## Create new data
 
 ```
-POST /api/project-manager/sprints (requires authentication)
+POST /api/project-manager/projects/:project_id/sprints (requires authentication)
 ```
 
 **Parameters**
@@ -116,7 +118,7 @@ Status: 201 Created
 ## Partial Update
 
 ```
-PATCH /api/project-manager/sprints/:sprint_id (requires authentication)
+PATCH /api/project-manager/projects/:project_id/sprints/:sprint_id (requires authentication)
 ```
 
 **Parameters**

@@ -60,7 +60,7 @@ class Sprint(BaseModel):
     project = models.ForeignKey(
         Project, on_delete=models.CASCADE, related_name="project_sprint"
     )
-    number = models.IntegerField()
+    number = models.PositiveIntegerField()
     name = models.CharField(max_length=255)
     description = models.TextField(blank=True)
     start_date = models.DateField()
