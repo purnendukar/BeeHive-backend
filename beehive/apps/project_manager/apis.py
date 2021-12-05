@@ -116,17 +116,22 @@ class SprintViewSet(
     queryset = Sprint.objects.all()
     serializer_class = SprintSerializer
 
+    search_fields = ("name", "description")
+    filterset_fields = {
+        "start_date": ["gte", "lte", "exact", "gt", "lt"],
+        "end_date": ["gte", "lte", "exact", "gt", "lt"],
+    }
+
     def get_permissions(self):
         permissions = super().get_permissions()
         permissions += [ProjectMemberPermission()]
         return permissions
 
-    filterset_fields = ("project",)
-
     def get_queryset(self):
         queryset = super().get_queryset()
         # Filter member related data
         return queryset.filter(
+            project=self.kwargs.get("project_id"),
             project__member__in=[self.request.user],
         )
 

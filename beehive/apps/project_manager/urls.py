@@ -28,8 +28,12 @@ default_router.register(
     TaskStatusViewSet,
     basename="project_status",
 )
+default_router.register(
+    r"projects/(?P<project_id>[^/.]+)/sprints",
+    SprintViewSet,
+    basename="project_sprints",
+)
 default_router.register("projects", ProjectViewSet, basename="project")
-default_router.register("sprints", SprintViewSet, basename="sprint")
 default_router.register("tasks", TaskViewSet, basename="task")
 default_router.register(
     "permissions", ProjectPermissionViewSet, basename="project_permission"
