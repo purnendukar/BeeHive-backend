@@ -22,6 +22,7 @@ class Project(BaseModel):
     member = models.ManyToManyField(
         User, through="ProjectMember", related_name="project_member"
     )
+    code = models.CharField(max_length=4)
 
     def __str__(self) -> str:
         return self.name
@@ -88,11 +89,20 @@ class TaskStatus(BaseModel):
 
 
 class Task(BaseModel):
+    PRIOTITY = (
+        ("very_high", "Very High"),
+        ("high", "High"),
+        ("medium", "Meidum"),
+        ("low", "Low"),
+        ("very_low", "Very Low"),
+    )
+    task_id = models.CharField(max_length=10)
     title = models.CharField(max_length=255)
     description = models.TextField(blank=True)
     status = models.ForeignKey(
         TaskStatus, on_delete=models.CASCADE, related_name="status_task"
     )
+    priority = models.CharField(choices=PRIOTITY, max_length=50)
     sprint = models.ForeignKey(
         Sprint, on_delete=models.CASCADE, related_name="sprint_task"
     )
@@ -118,9 +128,27 @@ class Task(BaseModel):
         blank=True,
         related_name="reported_task",
     )
+    estimated_time = models.DecimalField(
+        help_text="Estimate Time in hours", decimal_places=2, max_digits=2
+    )
 
     def __str__(self) -> str:
         return f"{self.title}({self.sprint.name} - {self.sprint.project})"
+
+
+class UserTaskLog(BaseModel):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="task_log")
+    task = models.ForeignKey(Task, on_delete=models.CASCADE, related_name="user_log")
+    date = models.DateField()
+    time_spent = models.DecimalField(
+        help_text="Time Spent in hours", decimal_places=2, max_digits=2
+    )
+    remaining_time = models.DecimalField(
+        help_text="Remaining Time in hours", decimal_places=2, max_digits=2
+    )
+
+    class Meta:
+        unique_together = ("user", "task", "date")
 
 
 class TaskAttachment(BaseModel):

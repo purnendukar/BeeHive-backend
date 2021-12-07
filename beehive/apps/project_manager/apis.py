@@ -151,7 +151,7 @@ class TaskViewSet(
         permissions += [ProjectMemberPermission()]
         return permissions
 
-    search_fields = ("title",)
+    search_fields = ("title", "description")
 
     filterset_fields = (
         "sprint",
