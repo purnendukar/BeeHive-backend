@@ -16,6 +16,7 @@ Name     | Description
 start_date | Start Date of sprint
 end_date | End Date of sprint
 search | Search data based on name and desciption
+is_complete | Is Sprint Completed (true/false)
 
 
 **Response**
@@ -34,7 +35,8 @@ Status: 200 OK
             "description": "",
             "project": "caf2fce2-2533-4562-b9dd-1d4a6e20d511",
             "start_date": "2021-12-01",
-            "end_date": "2021-12-30"
+            "end_date": "2021-12-30",
+            "is_complete": false
         },
         {
             "id": "edf7541a-5e9e-400d-af13-8f0883de76a8",
@@ -43,7 +45,8 @@ Status: 200 OK
             "description": "",
             "project": "caf2fce2-2533-4562-b9dd-1d4a6e20d511",
             "start_date": "2021-11-21",
-            "end_date": "2021-11-30"
+            "end_date": "2021-11-30",
+            "is_complete": false
         }
     ]
 }
@@ -63,7 +66,8 @@ Status: 200 OK
 {
     "id": "caf2fce2-2533-4562-b9dd-1d4a6e20d511",
     "name": "Test",
-    "description": ""
+    "description": "",
+    "is_complete": false
 }
 ```
 
@@ -106,7 +110,8 @@ Status: 201 Created
     "description": "",
     "project": "caf2fce2-2533-4562-b9dd-1d4a6e20d511",
     "start_date": "2021-12-01",
-    "end_date": "2021-12-30"
+    "end_date": "2021-12-30",
+    "is_complete": false
 }
 ```
 
@@ -134,7 +139,8 @@ end_date | sprint end date
     "description": "",
     "project": "caf2fce2-2533-4562-b9dd-1d4a6e20d511",
     "start_date": "2021-12-01",
-    "end_date": "2021-12-30"
+    "end_date": "2021-12-30",
+    "is_complete": false
 }
 ```
 
@@ -149,6 +155,7 @@ Status: 200 OK
     "description": "",
     "project": "caf2fce2-2533-4562-b9dd-1d4a6e20d511",
     "start_date": "2021-12-01",
-    "end_date": "2021-12-30"
+    "end_date": "2021-12-30",
+    "is_complete": false
 }
 ```
