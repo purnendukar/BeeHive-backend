@@ -120,6 +120,7 @@ class SprintViewSet(
     filterset_fields = {
         "start_date": ["gte", "lte", "exact", "gt", "lt"],
         "end_date": ["gte", "lte", "exact", "gt", "lt"],
+        "is_complete": ["exact"],
     }
 
     def get_permissions(self):

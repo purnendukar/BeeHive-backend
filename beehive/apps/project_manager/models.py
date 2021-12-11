@@ -62,13 +62,13 @@ class Sprint(BaseModel):
         Project, on_delete=models.CASCADE, related_name="project_sprint"
     )
     number = models.PositiveIntegerField()
-    name = models.CharField(max_length=255)
     description = models.TextField(blank=True)
     start_date = models.DateField()
     end_date = models.DateField()
+    is_complete = models.BooleanField(default=False)
 
     def __str__(self) -> str:
-        return f"{self.name}({self.project})"
+        return f"Sprint {self.number} ({self.project})"
 
 
 class TaskStatus(BaseModel):
@@ -129,11 +129,11 @@ class Task(BaseModel):
         related_name="reported_task",
     )
     estimated_time = models.DecimalField(
-        help_text="Estimate Time in hours", decimal_places=2, max_digits=2
+        help_text="Estimate Time in hours", decimal_places=2, max_digits=4
     )
 
     def __str__(self) -> str:
-        return f"{self.title}({self.sprint.name} - {self.sprint.project})"
+        return f"{self.title} (Sprint {self.sprint.number} - {self.sprint.project})"
 
 
 class UserTaskLog(BaseModel):
