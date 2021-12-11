@@ -96,7 +96,7 @@ class Task(BaseModel):
         ("low", "Low"),
         ("very_low", "Very Low"),
     )
-    task_id = models.CharField(max_length=10)
+    task_id = models.CharField(max_length=10, blank=True)
     title = models.CharField(max_length=255)
     description = models.TextField(blank=True)
     status = models.ForeignKey(
@@ -134,6 +134,9 @@ class Task(BaseModel):
 
     def __str__(self) -> str:
         return f"{self.title} (Sprint {self.sprint.number} - {self.sprint.project})"
+
+    class Meta:
+        ordering = ("task_id",)
 
 
 class UserTaskLog(BaseModel):

@@ -149,8 +149,10 @@ class TaskViewSet(
 
     def get_permissions(self):
         permissions = super().get_permissions()
-        permissions += [ProjectMemberPermission()]
+        # permissions += [ProjectMemberPermission()]
         return permissions
+
+    lookup_field = "task_id"
 
     search_fields = ("title", "description")
 
@@ -170,6 +172,16 @@ class TaskViewSet(
         return queryset.filter(
             sprint__project__member__in=[self.request.user],
         )
+
+    def perform_create(self, serializer):
+        last_task = (
+            self.get_queryset()
+            .filter(sprint__project=serializer.validated_data["sprint"].project)
+            .last()
+        )
+        (project_code, last_task_id) = last_task.task_id.split("-")
+        task_id = f"{project_code}-{int(last_task_id)+1}"
+        serializer.save(task_id=task_id)
 
 
 class TaskStatusViewSet(

@@ -91,7 +91,9 @@ class TaskAttachmentSerializer(DynamicFieldsModelSerializer):
 
 
 class TaskSerializer(DynamicFieldsModelSerializer):
-    attachments = TaskAttachmentSerializer(source="task_attachment", many=True)
+    attachments = TaskAttachmentSerializer(
+        source="task_attachment", many=True, read_only=True
+    )
 
     class Meta:
         model = Task
@@ -108,8 +110,12 @@ class TaskSerializer(DynamicFieldsModelSerializer):
             "assignee",
             "reporter",
             "attachments",
+            "estimated_time",
         )
-        read_only_fields = ("attachments",)
+        extra_args = {
+            "attachments": {"required": False},
+            "task_id": {"required": False, "read_only": True},
+        }
 
     def to_representation(self, instance):
         data = super().to_representation(instance)
