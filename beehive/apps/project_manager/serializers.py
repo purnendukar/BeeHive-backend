@@ -59,11 +59,11 @@ class SprintSerializer(DynamicFieldsModelSerializer):
         fields = (
             "id",
             "number",
-            "name",
             "description",
             "project",
             "start_date",
             "end_date",
+            "is_complete",
         )
 
 
@@ -91,22 +91,31 @@ class TaskAttachmentSerializer(DynamicFieldsModelSerializer):
 
 
 class TaskSerializer(DynamicFieldsModelSerializer):
-    attachment = serializers.SerializerMethodField()
+    attachments = TaskAttachmentSerializer(
+        source="task_attachment", many=True, read_only=True
+    )
 
     class Meta:
         model = Task
         fields = (
             "id",
+            "task_id",
             "title",
             "description",
+            "priority",
             "sprint",
             "status",
             "parent",
             "depedency",
             "assignee",
             "reporter",
-            "attachment",
+            "attachments",
+            "estimated_time",
         )
+        extra_args = {
+            "attachments": {"required": False},
+            "task_id": {"required": False, "read_only": True},
+        }
 
     def to_representation(self, instance):
         data = super().to_representation(instance)
@@ -118,13 +127,9 @@ class TaskSerializer(DynamicFieldsModelSerializer):
                 "description",
             ),
         ).data
+        data["sprint"] = SprintSerializer(instance.sprint, fields=("id", "number")).data
         data["assignee"] = UserSerializer(instance.assignee).data
         return data
-
-    def get_attachment(self, instance):
-        if hasattr(instance, "task_attachment"):
-            return TaskAttachmentSerializer(instance.task_attachment, many=True).data
-        return []
 
 
 class TaskCommentAttachmentSerializer(DynamicFieldsModelSerializer):
@@ -137,13 +142,9 @@ class TaskCommentAttachmentSerializer(DynamicFieldsModelSerializer):
 
 
 class TaskCommentSerializer(DynamicFieldsModelSerializer):
-    attachment = serializers.SerializerMethodField()
+    attachments = TaskAttachmentSerializer(source="task_comment_attachment", many=True)
 
     class Meta:
         model = TaskComment
-        fields = ("id", "user", "comment")
-
-    def get_attachment(self, instance):
-        if hasattr(instance, "task_comment_attachment"):
-            return TaskAttachmentSerializer(instance.task_comment_attachment).data
-        return []
+        fields = ("id", "user", "comment", "attachments")
+        read_only_fields = ("attachments",)

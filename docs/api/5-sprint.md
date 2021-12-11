@@ -16,6 +16,7 @@ Name     | Description
 start_date | Start Date of sprint
 end_date | End Date of sprint
 search | Search data based on name and desciption
+is_complete | Is Sprint Completed (true/false)
 
 
 **Response**
@@ -31,11 +32,11 @@ Status: 200 OK
         {
             "id": "7e1924c5-7aa7-4310-8f43-89ebc05d9c81",
             "number": 2,
-            "name": "sprint 2",
             "description": "",
             "project": "caf2fce2-2533-4562-b9dd-1d4a6e20d511",
             "start_date": "2021-12-01",
-            "end_date": "2021-12-30"
+            "end_date": "2021-12-30",
+            "is_complete": false
         },
         {
             "id": "edf7541a-5e9e-400d-af13-8f0883de76a8",
@@ -44,7 +45,8 @@ Status: 200 OK
             "description": "",
             "project": "caf2fce2-2533-4562-b9dd-1d4a6e20d511",
             "start_date": "2021-11-21",
-            "end_date": "2021-11-30"
+            "end_date": "2021-11-30",
+            "is_complete": false
         }
     ]
 }
@@ -64,7 +66,8 @@ Status: 200 OK
 {
     "id": "caf2fce2-2533-4562-b9dd-1d4a6e20d511",
     "name": "Test",
-    "description": ""
+    "description": "",
+    "is_complete": false
 }
 ```
 
@@ -80,7 +83,6 @@ POST /api/project-manager/projects/:project_id/sprints (requires authentication)
 Name     | Description
 ---------|-------------------------------------
 description | Description about sprint
-name | Name of the sprint
 number | Sprint number
 project | project id
 start_date | sprint start date
@@ -90,7 +92,6 @@ end_date | sprint end date
 ```json
 {
     "number": 1,
-    "name": "sprint 1",
     "description": "",
     "project": "caf2fce2-2533-4562-b9dd-1d4a6e20d511",
     "start_date": "2021-11-21",
@@ -106,11 +107,11 @@ Status: 201 Created
 {
     "id": "7e1924c5-7aa7-4310-8f43-89ebc05d9c81",
     "number": 2,
-    "name": "sprint 2",
     "description": "",
     "project": "caf2fce2-2533-4562-b9dd-1d4a6e20d511",
     "start_date": "2021-12-01",
-    "end_date": "2021-12-30"
+    "end_date": "2021-12-30",
+    "is_complete": false
 }
 ```
 
@@ -126,7 +127,6 @@ PATCH /api/project-manager/projects/:project_id/sprints/:sprint_id (requires aut
 Name     | Description
 ---------|-------------------------------------
 description | Description about sprint
-name | Name of the sprint
 number | Sprint number
 project | project id
 start_date | sprint start date
@@ -136,11 +136,11 @@ end_date | sprint end date
 ```json
 {
     "number": 2,
-    "name": "sprint 2",
     "description": "",
     "project": "caf2fce2-2533-4562-b9dd-1d4a6e20d511",
     "start_date": "2021-12-01",
-    "end_date": "2021-12-30"
+    "end_date": "2021-12-30",
+    "is_complete": false
 }
 ```
 
@@ -152,10 +152,10 @@ Status: 200 OK
 {
     "id": "7e1924c5-7aa7-4310-8f43-89ebc05d9c81",
     "number": 2,
-    "name": "sprint 2",
     "description": "",
     "project": "caf2fce2-2533-4562-b9dd-1d4a6e20d511",
     "start_date": "2021-12-01",
-    "end_date": "2021-12-30"
+    "end_date": "2021-12-30",
+    "is_complete": false
 }
 ```
