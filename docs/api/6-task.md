@@ -26,36 +26,58 @@ Status: 200 OK
     "previous": null,
     "results": [
         {
-            "id": "4db0e52b-421f-4194-b1b2-eb9ad1c7fda9",
+            "id": "de2f11d3-5376-4264-84fd-c24b2d9b51a3",
+            "task_id": "BH-1",
             "title": "test tiele",
             "description": "",
-            "sprint": "7e1924c5-7aa7-4310-8f43-89ebc05d9c81",
+            "priority": "high",
+            "sprint": {
+                "id": "a335f532-158d-4304-88a6-f33eddef56cb",
+                "number": 1
+            },
             "status": {
-                "id": "3e07a633-d863-4a1c-8f49-2407e2d4f08c",
+                "id": "e41d5c65-4d8a-4257-9f35-58995c8e012f",
                 "name": "To DO",
-                "description": ""
+                "description": "todo"
             },
             "parent": null,
             "depedency": null,
-            "assignee": "e83c2bab-022d-482e-b0ae-153976dedb18",
+            "assignee": {
+                "id": "e83c2bab-022d-482e-b0ae-153976dedb18",
+                "email": "purnendu.kar8+1@gmail.com",
+                "first_name": "Test",
+                "last_name": "User"
+            },
             "reporter": "6cd957cb-5604-442a-a843-0e24b0bc758d",
-            "attachment": []
+            "attachments": [],
+            "estimated_time": "1.00"
         },
         {
-            "id": "83c04731-5e53-4207-9a48-47aa0469fa98",
+            "id": "de2f11d3-5376-4264-84fd-c24b2d9b51a3",
+            "task_id": "BH-2",
             "title": "test tiele",
             "description": "",
-            "sprint": "7e1924c5-7aa7-4310-8f43-89ebc05d9c81",
+            "priority": "high",
+            "sprint": {
+                "id": "a335f532-158d-4304-88a6-f33eddef56cb",
+                "number": 1
+            },
             "status": {
-                "id": "3e07a633-d863-4a1c-8f49-2407e2d4f08c",
+                "id": "e41d5c65-4d8a-4257-9f35-58995c8e012f",
                 "name": "To DO",
-                "description": ""
+                "description": "todo"
             },
             "parent": null,
             "depedency": null,
-            "assignee": "e83c2bab-022d-482e-b0ae-153976dedb18",
+            "assignee": {
+                "id": "e83c2bab-022d-482e-b0ae-153976dedb18",
+                "email": "purnendu.kar8+1@gmail.com",
+                "first_name": "Test",
+                "last_name": "User"
+            },
             "reporter": "6cd957cb-5604-442a-a843-0e24b0bc758d",
-            "attachment": []
+            "attachments": [],
+            "estimated_time": "1.00"
         }
     ]
 }
@@ -73,20 +95,31 @@ Status: 200 OK
 ```
 ```json
 {
-    "id": "4db0e52b-421f-4194-b1b2-eb9ad1c7fda9",
+    "id": "de2f11d3-5376-4264-84fd-c24b2d9b51a3",
+    "task_id": "BH-5",
     "title": "test tiele",
     "description": "",
-    "sprint": "7e1924c5-7aa7-4310-8f43-89ebc05d9c81",
+    "priority": "high",
+    "sprint": {
+        "id": "a335f532-158d-4304-88a6-f33eddef56cb",
+        "number": 1
+    },
     "status": {
-        "id": "3e07a633-d863-4a1c-8f49-2407e2d4f08c",
+        "id": "e41d5c65-4d8a-4257-9f35-58995c8e012f",
         "name": "To DO",
-        "description": ""
+        "description": "todo"
     },
     "parent": null,
     "depedency": null,
-    "assignee": "e83c2bab-022d-482e-b0ae-153976dedb18",
+    "assignee": {
+        "id": "e83c2bab-022d-482e-b0ae-153976dedb18",
+        "email": "purnendu.kar8+1@gmail.com",
+        "first_name": "Test",
+        "last_name": "User"
+    },
     "reporter": "6cd957cb-5604-442a-a843-0e24b0bc758d",
-    "attachment": []
+    "attachments": [],
+    "estimated_time": "1.00"
 }
 ```
 
@@ -113,14 +146,15 @@ reporter | reported user id
 **Request**
 ```json
 {
-    "title": "test tiele child",
+    "title": "test tiele",
     "description": "",
-    "sprint": "7e1924c5-7aa7-4310-8f43-89ebc05d9c81",
-    "status": "3e07a633-d863-4a1c-8f49-2407e2d4f08c",
-    "parent": "83c04731-5e53-4207-9a48-47aa0469fa98",
+    "sprint": "a335f532-158d-4304-88a6-f33eddef56cb",
+    "status": "e41d5c65-4d8a-4257-9f35-58995c8e012f",
     "depedency": null,
     "assignee": "e83c2bab-022d-482e-b0ae-153976dedb18",
-    "reporter": "6cd957cb-5604-442a-a843-0e24b0bc758d"
+    "reporter": "6cd957cb-5604-442a-a843-0e24b0bc758d",
+    "priority": "high",
+    "estimated_time": "1"
 }
 ```
 
@@ -130,20 +164,31 @@ Status: 201 Created
 ```
 ```json
 {
-    "id": "f2b439d8-8ba9-4e40-affd-d9744db2fc09",
-    "title": "test tiele child",
+    "id": "de2f11d3-5376-4264-84fd-c24b2d9b51a3",
+    "task_id": "BH-5",
+    "title": "test tiele",
     "description": "",
-    "sprint": "7e1924c5-7aa7-4310-8f43-89ebc05d9c81",
-    "status": {
-        "id": "3e07a633-d863-4a1c-8f49-2407e2d4f08c",
-        "name": "To DO",
-        "description": ""
+    "priority": "high",
+    "sprint": {
+        "id": "a335f532-158d-4304-88a6-f33eddef56cb",
+        "number": 1
     },
-    "parent": "83c04731-5e53-4207-9a48-47aa0469fa98",
+    "status": {
+        "id": "e41d5c65-4d8a-4257-9f35-58995c8e012f",
+        "name": "To DO",
+        "description": "todo"
+    },
+    "parent": null,
     "depedency": null,
-    "assignee": "e83c2bab-022d-482e-b0ae-153976dedb18",
+    "assignee": {
+        "id": "e83c2bab-022d-482e-b0ae-153976dedb18",
+        "email": "purnendu.kar8+1@gmail.com",
+        "first_name": "Test",
+        "last_name": "User"
+    },
     "reporter": "6cd957cb-5604-442a-a843-0e24b0bc758d",
-    "attachment": []
+    "attachments": [],
+    "estimated_time": "1.00"
 }
 ```
 
@@ -166,18 +211,21 @@ parent | parent task id
 dependency | dependency task id
 assignee | assigned user id
 reporter | reported user id
+priority | priority level (very_low, low, medium, high, very_high)
+estimated_time | Estimated time in hours (Decimal value)
 
 **Request**
 ```json
 {
-    "title": "test tiele child",
+    "title": "test tiele",
     "description": "",
-    "sprint": "7e1924c5-7aa7-4310-8f43-89ebc05d9c81",
-    "status": "3e07a633-d863-4a1c-8f49-2407e2d4f08c",
-    "parent": "83c04731-5e53-4207-9a48-47aa0469fa98",
+    "sprint": "a335f532-158d-4304-88a6-f33eddef56cb",
+    "status": "e41d5c65-4d8a-4257-9f35-58995c8e012f",
     "depedency": null,
     "assignee": "e83c2bab-022d-482e-b0ae-153976dedb18",
-    "reporter": "6cd957cb-5604-442a-a843-0e24b0bc758d"
+    "reporter": "6cd957cb-5604-442a-a843-0e24b0bc758d",
+    "priority": "high",
+    "estimated_time": "1"
 }
 ```
 
@@ -187,19 +235,30 @@ Status: 200 OK
 ```
 ```json
 {
-    "id": "f2b439d8-8ba9-4e40-affd-d9744db2fc09",
-    "title": "test tiele child",
+    "id": "de2f11d3-5376-4264-84fd-c24b2d9b51a3",
+    "task_id": "BH-5",
+    "title": "test tiele",
     "description": "",
-    "sprint": "7e1924c5-7aa7-4310-8f43-89ebc05d9c81",
-    "status": {
-        "id": "3e07a633-d863-4a1c-8f49-2407e2d4f08c",
-        "name": "To DO",
-        "description": ""
+    "priority": "high",
+    "sprint": {
+        "id": "a335f532-158d-4304-88a6-f33eddef56cb",
+        "number": 1
     },
-    "parent": "83c04731-5e53-4207-9a48-47aa0469fa98",
+    "status": {
+        "id": "e41d5c65-4d8a-4257-9f35-58995c8e012f",
+        "name": "To DO",
+        "description": "todo"
+    },
+    "parent": null,
     "depedency": null,
-    "assignee": "e83c2bab-022d-482e-b0ae-153976dedb18",
+    "assignee": {
+        "id": "e83c2bab-022d-482e-b0ae-153976dedb18",
+        "email": "purnendu.kar8+1@gmail.com",
+        "first_name": "Test",
+        "last_name": "User"
+    },
     "reporter": "6cd957cb-5604-442a-a843-0e24b0bc758d",
-    "attachment": []
+    "attachments": [],
+    "estimated_time": "1.00"
 }
 ```

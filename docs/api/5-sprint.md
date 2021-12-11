@@ -31,7 +31,6 @@ Status: 200 OK
         {
             "id": "7e1924c5-7aa7-4310-8f43-89ebc05d9c81",
             "number": 2,
-            "name": "sprint 2",
             "description": "",
             "project": "caf2fce2-2533-4562-b9dd-1d4a6e20d511",
             "start_date": "2021-12-01",
@@ -80,7 +79,6 @@ POST /api/project-manager/projects/:project_id/sprints (requires authentication)
 Name     | Description
 ---------|-------------------------------------
 description | Description about sprint
-name | Name of the sprint
 number | Sprint number
 project | project id
 start_date | sprint start date
@@ -90,7 +88,6 @@ end_date | sprint end date
 ```json
 {
     "number": 1,
-    "name": "sprint 1",
     "description": "",
     "project": "caf2fce2-2533-4562-b9dd-1d4a6e20d511",
     "start_date": "2021-11-21",
@@ -106,7 +103,6 @@ Status: 201 Created
 {
     "id": "7e1924c5-7aa7-4310-8f43-89ebc05d9c81",
     "number": 2,
-    "name": "sprint 2",
     "description": "",
     "project": "caf2fce2-2533-4562-b9dd-1d4a6e20d511",
     "start_date": "2021-12-01",
@@ -126,7 +122,6 @@ PATCH /api/project-manager/projects/:project_id/sprints/:sprint_id (requires aut
 Name     | Description
 ---------|-------------------------------------
 description | Description about sprint
-name | Name of the sprint
 number | Sprint number
 project | project id
 start_date | sprint start date
@@ -136,7 +131,6 @@ end_date | sprint end date
 ```json
 {
     "number": 2,
-    "name": "sprint 2",
     "description": "",
     "project": "caf2fce2-2533-4562-b9dd-1d4a6e20d511",
     "start_date": "2021-12-01",
@@ -152,7 +146,6 @@ Status: 200 OK
 {
     "id": "7e1924c5-7aa7-4310-8f43-89ebc05d9c81",
     "number": 2,
-    "name": "sprint 2",
     "description": "",
     "project": "caf2fce2-2533-4562-b9dd-1d4a6e20d511",
     "start_date": "2021-12-01",
