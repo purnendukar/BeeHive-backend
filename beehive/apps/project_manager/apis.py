@@ -149,7 +149,7 @@ class TaskViewSet(
 
     def get_permissions(self):
         permissions = super().get_permissions()
-        # permissions += [ProjectMemberPermission()]
+        permissions += [ProjectMemberPermission()]
         return permissions
 
     lookup_field = "task_id"
