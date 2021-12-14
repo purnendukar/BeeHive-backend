@@ -9,6 +9,12 @@
 GET /api/project-manager/projects/:project_id/status (requires authentication)
 ```
 
+**Filter Parameter**
+
+Name     | Description
+---------|-------------------------------------
+search | Search data based on name and desciption
+
 **Response**
 ```
 Status: 200 OK
