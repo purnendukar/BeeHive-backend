@@ -72,7 +72,7 @@ class TaskStatusSerialier(DynamicFieldsModelSerializer):
         model = TaskStatus
         fields = (
             "id",
-            "name",
+            "title",
             "description",
             "sort_order",
             "is_todo",
