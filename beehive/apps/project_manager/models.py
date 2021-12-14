@@ -72,7 +72,7 @@ class Sprint(BaseModel):
 
 
 class TaskStatus(BaseModel):
-    name = models.CharField(max_length=255)
+    title = models.CharField(max_length=255)
     description = models.TextField(blank=True)
     project = models.ForeignKey(
         Project, on_delete=models.CASCADE, related_name="project_task"

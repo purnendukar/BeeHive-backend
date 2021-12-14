@@ -9,6 +9,12 @@
 GET /api/project-manager/projects/:project_id/status (requires authentication)
 ```
 
+**Filter Parameter**
+
+Name     | Description
+---------|-------------------------------------
+search | Search data based on title and desciption
+
 **Response**
 ```
 Status: 200 OK
@@ -21,7 +27,7 @@ Status: 200 OK
     "results": [
         {
             "id": "e41d5c65-4d8a-4257-9f35-58995c8e012f",
-            "name": "To DO",
+            "title": "To DO",
             "description": "todo",
             "sort_order": 1,
             "is_todo": true,
@@ -45,7 +51,7 @@ Status: 200 OK
 ```json
 {
     "id": "e41d5c65-4d8a-4257-9f35-58995c8e012f",
-    "name": "To DO",
+    "title": "To DO",
     "description": "todo",
     "sort_order": 1,
     "is_todo": true,
@@ -65,14 +71,14 @@ POST /api/project-manager/projects/:project_id/status (requires authentication)
 
 Name     | Description
 ---------|-------------------------------------
-name | name of role
+title | title of status
 permission | list of permission ids
-description | description of role
+description | description of status
 
 **Request**
 ```json
 {
-    "name": "To DO",
+    "title": "To DO",
     "description": "todo",
     "sort_order": 1,
     "is_todo": true,
@@ -87,7 +93,7 @@ Status: 201 Created
 ```json
 {
     "id": "e41d5c65-4d8a-4257-9f35-58995c8e012f",
-    "name": "To DO",
+    "title": "To DO",
     "description": "todo",
     "sort_order": 1,
     "is_todo": true,
@@ -107,14 +113,14 @@ PATCH /api/project-manager/projects/:project_id/status/:status_id(requires authe
 
 Name     | Description
 ---------|-------------------------------------
-name | name of role
+title | title of status
 permission | list of permission ids
-description | description of role
+description | description of status
 
 **Request**
 ```json
 {
-    "name": "To DO",
+    "title": "To DO",
     "description": "todo",
     "sort_order": 1,
     "is_todo": true,
@@ -129,7 +135,7 @@ Status: 201 Created
 ```json
 {
     "id": "e41d5c65-4d8a-4257-9f35-58995c8e012f",
-    "name": "To DO",
+    "title": "To DO",
     "description": "todo",
     "sort_order": 1,
     "is_todo": true,

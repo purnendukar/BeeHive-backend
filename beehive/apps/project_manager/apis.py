@@ -194,6 +194,8 @@ class TaskStatusViewSet(
     queryset = TaskStatus.objects.all()
     serializer_class = TaskStatusSerialier
 
+    search_fields = ("title", "description")
+
     def get_permissions(self):
         permissions = super().get_permissions()
         permissions += [ProjectMemberPermission()]
